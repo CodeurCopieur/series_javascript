@@ -50,7 +50,14 @@
         form.addEventListener('submit', (e) => {
           e.preventDefault();
 
-          
+          username = form.elements['username'].value;
+          email = form.elements['email'].value;
+          password = form.elements['password'].value;
+
+          console.log(username, email, password);
+          localStorage.setItem('username', username)
+          localStorage.setItem('email', email)
+          localStorage.setItem('password', password)
         });
 
 
