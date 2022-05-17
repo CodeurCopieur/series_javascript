@@ -54,10 +54,26 @@
           email = form.elements['email'].value;
           password = form.elements['password'].value;
 
-          console.log(username, email, password);
-          localStorage.setItem('username', username)
-          localStorage.setItem('email', email)
-          localStorage.setItem('password', password)
+          // console.log(username, email, password);
+          // localStorage.setItem('username', username)
+          // localStorage.setItem('email', email)
+          // localStorage.setItem('password', password)
+
+          let userArray = new Array();
+          userArray = JSON.parse(localStorage.getItem('users')) ? JSON.parse(localStorage.getItem('users')) : [];
+
+          if(userArray.some((v) => { return v.email == email})) {
+            alert('duplicate data')
+          } else {
+            userArray.push({
+              'username': username,
+              'email': email,
+              'password': password
+            })
+
+            localStorage.setItem('users', JSON.stringify(userArray))
+          }
+          
         });
 
 
