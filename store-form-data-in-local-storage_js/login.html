@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>#localstorage #form #JavaScript</title>
+  <title>#localstorage #form #JavaScript</script> </title>
   <link rel="stylesheet" href="./index.css">
 </head>
 
@@ -54,6 +54,9 @@
 
           if(user_records.some((v) => { return v.email == email && v.password == password})) {
             alert('Login success');
+            let current_user=user_records.filter((v) => {return v.email == email && v.password == password})[0];
+            localStorage.setItem('username', current_user.username);
+            localStorage.setItem('email', current_user.email);
             window.location.href = "profile.html";
           } else {
             alert('Login fail')

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#localstorage #form #JavaScript</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Profile</h2>
+      <hr>
+      <h3>Bienvenue</h3>
+      <h4 id="username">Nom: <span></span></h4>
+      <h4 id="email">Email: <span></span></h4>
+    </div>
+  </div>
+  <script>
+    //namespace shaker
+    var Shaker = (() => {
+      var self = {};
+
+      //Methode public car nous pouvons l'appeler de l'extérieur
+      //Structure appeler le module parttern
+      self.init = () => {
+
+        // email = form.elements['email'].value;
+        // password = form.elements['password'].value;
+
+        // let user_records = new Array();
+        // user_records = JSON.parse(localStorage.getItem('users')) ? JSON.parse(localStorage.getItem('users')) : [];
+
+        // if (user_records.some((v) => { return v.email == email && v.password == password})) {
+          
+          
+        //   console.log(current_user);
+        //   // window.location.href = "profile.html";
+
+        // } else {
+        //   alert('Login fail')
+        // }
+
+        document.querySelector('#username span').textContent = `${localStorage.getItem('username')}`;
+        document.querySelector('#email span').textContent = `${localStorage.getItem('email')}`;
+
+      }
+
+      return self;
+    })(); //closure qui s'appelle elle même ()
+
+
+    Shaker.init();
+  </script>
+</body>
+
+</html>
