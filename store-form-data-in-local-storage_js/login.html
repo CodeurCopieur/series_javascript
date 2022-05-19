@@ -49,17 +49,12 @@
           email = form.elements['email'].value;
           password = form.elements['password'].value;
 
-          // console.log(username, email, password);
-          // localStorage.setItem('username', username)
-          // localStorage.setItem('email', email)
-          // localStorage.setItem('password', password)
+          let user_records= new Array();
+          user_records = JSON.parse(localStorage.getItem('users')) ? JSON.parse(localStorage.getItem('users')) : [];
 
-          let userArray = new Array();
-          userArray = JSON.parse(localStorage.getItem('users')) ? JSON.parse(localStorage.getItem('users')) : [];
-
-          if(userArray.some((v) => { return v.email == email && v.password == password})) {
+          if(user_records.some((v) => { return v.email == email && v.password == password})) {
             alert('Login success');
-            window.location.href = "profile.html"
+            window.location.href = "profile.html";
           } else {
             alert('Login fail')
           }
