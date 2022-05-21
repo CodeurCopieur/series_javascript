@@ -13,6 +13,7 @@
   <div class="container">
     <div class="header">
       <h2>Profile</h2>
+      <button id="btn-logout" class="btn-logout">Deco</button>
       <hr>
       <h3>Bienvenue</h3>
       <h4 id="username">Nom: <span></span></h4>
@@ -44,8 +45,23 @@
         //   alert('Login fail')
         // }
 
-        document.querySelector('#username span').textContent = `${localStorage.getItem('username')}`;
-        document.querySelector('#email span').textContent = `${localStorage.getItem('email')}`;
+
+        let username = localStorage.getItem('username') ? localStorage.getItem('username') : '';
+          // si la variable username  est vide nous sommes rediriger vers la page login.html
+        if(username == '') {
+          //alert(`tu dois d'abord te connecter`);
+          window.location.href = "login.html";
+        } else {
+          document.querySelector('#username span').textContent = `${localStorage.getItem('username')}`;
+          document.querySelector('#email span').textContent = `${localStorage.getItem('email')}`;
+        }
+
+        document.querySelector('#btn-logout').addEventListener('click', function(e) {
+          console.log(e);
+          localStorage.removeItem('username');
+          localStorage.removeItem('email');
+          window.location.href = "login.html";
+        })
 
       }
 

@@ -40,6 +40,12 @@
       //Methode public car nous pouvons l'appeler de l'extérieur
       //Structure appeler le module parttern
       self.init = () => {
+        // si username (dans le localStorge) n'est pas vide nous sommes rediriger vers sur son profil
+        let username = localStorage.getItem('username') ? localStorage.getItem('username') : '';
+        if(username != '') {
+          alert(`veuillez visiter le profil`);
+          window.location.href = "profile.html";
+        } 
 
         form = document.querySelector('.form')
 
@@ -48,10 +54,11 @@
 
           email = form.elements['email'].value;
           password = form.elements['password'].value;
-
+          
           let user_records= new Array();
           user_records = JSON.parse(localStorage.getItem('users')) ? JSON.parse(localStorage.getItem('users')) : [];
 
+          // si l'un des objets qui est contenu dans le tableau users correspond au filter il sera contenu 
           if(user_records.some((v) => { return v.email == email && v.password == password})) {
             alert('Login success');
             let current_user=user_records.filter((v) => {return v.email == email && v.password == password})[0];
