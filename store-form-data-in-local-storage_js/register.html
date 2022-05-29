@@ -34,6 +34,21 @@
 
       <button type="submit">Submit</button>
     </form>
+
+    <div class="header">
+      <h2>Users table</h2>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Password</th>
+        </tr>
+      </thead>
+      <tbody id="bodyContent">
+      </tbody>
+    </table>
   </div>
 
   <script>
@@ -45,11 +60,17 @@
       //Structure appeler le module parttern
       self.init = () => {
 
+        showData()
+
         form = document.querySelector('.form')
 
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', (e)=>{
           e.preventDefault();
 
+          saveData()
+        });
+
+        function saveData() {
           username = form.elements['username'].value;
           email = form.elements['email'].value;
           password = form.elements['password'].value;
@@ -63,20 +84,46 @@
           userArray = JSON.parse(localStorage.getItem('users')) ? JSON.parse(localStorage.getItem('users')) : [];
 
           if(userArray.some((v) => { return v.email == email})) {
-            alert('duplicate data')
+            alert('duplicate data');
           } else {
             userArray.push({
               'username': username,
               'email': email,
               'password': password
-            })
+            });
 
-            localStorage.setItem('users', JSON.stringify(userArray))
+            localStorage.setItem('users', JSON.stringify(userArray));
           }
+          showData();
+        }
+
+        function showData() {
+
+          let userArray = new Array();
+          userArray = JSON.parse(localStorage.getItem('users')) ? JSON.parse(localStorage.getItem('users')) : [];
+
+          let container = document.getElementById('bodyContent');
+          container.innerHTML = "";
+
+          if (userArray) {
+
+            for (const key in userArray) {
+                const element = userArray[key];
+
+                let template = `<tr>
+                <td>${userArray[key].username}</td>
+                <td>${userArray[key].email}</td>
+                <td>${userArray[key].password}</td>
+              </tr>`;
+
+                container.insertAdjacentHTML('beforeend', template);
+            }
+            
+          }
+
           
-        });
-
-
+          
+        }
       }
 
       return self;
