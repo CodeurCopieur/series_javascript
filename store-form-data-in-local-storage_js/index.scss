@@ -22,10 +22,11 @@ body {
   width: 70%;
   max-width: 100%;
   overflow: hidden;
+  padding: 2rem 2.5rem;
 }
 
 .header {
-  padding: 1.25rem 2.5rem;
+  margin-bottom: 1.25rem;
   position: relative;
 
   h2 {
@@ -46,7 +47,7 @@ body {
 
 
 .form {
-  padding: 1.875rem 2.5rem;
+  margin-bottom: 1.25rem;
 }  
 
 .form-control {
@@ -74,4 +75,19 @@ body {
   border: none;
   width: 100%;
   box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #000;
+  color: #FFF;
+}
+th, td {
+  padding: 10px;
+  text-align: left;
+  border: solid 1px #ccc;
 }
