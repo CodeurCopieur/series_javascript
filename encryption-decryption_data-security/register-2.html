@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data decryption in javascript | Base64 | BTOA | Data Security in Javascript</title>
+  <link rel="stylesheet" href="../store-form-data-in-local-storage_js/index.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="header">
+      <h2>Decoder Data Form</h2>
+    </div>
+
+    <form id="form" class="form">
+
+      <div class="form-control">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="username@test.com">
+      </div>
+
+      <div class="form-control">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="**********">
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div class="header">
+      <h2>decryption table</h2>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Password</th>
+        </tr>
+      </thead>
+      <tbody id="bodyContent">
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    //namespace shaker
+    var Shaker = (() => {
+      var self = {};
+
+      //Methode public car nous pouvons l'appeler de l'extérieur
+      //Structure appeler le module parttern
+      self.init = () => {
+
+        showData()
+
+        form = document.querySelector('.form')
+
+        form.addEventListener('submit', (e)=>{
+          e.preventDefault();
+
+          saveData()
+        });
+
+        function saveData() {
+          email = btoa(form.elements['email'].value);
+          password = btoa(form.elements['password'].value);
+
+          let userArray = new Array();
+          userArray = JSON.parse(localStorage.getItem('encryption')) ? JSON.parse(localStorage.getItem('encryption')) : [];
+
+          if(userArray.some((v) => { return v.email == email})) {
+            alert('duplicate data');
+          } else {
+            userArray.push({
+              'email': email,
+              'password': password
+            });
+
+            localStorage.setItem('encryption', JSON.stringify(userArray));
+          }
+          showData();
+        }
+
+        function showData() {
+
+          let userArray = new Array();
+          userArray = JSON.parse(localStorage.getItem('encryption')) ? JSON.parse(localStorage.getItem('encryption')) : [];
+
+          let container = document.getElementById('bodyContent');
+          container.innerHTML = "";
+
+          if (userArray) {
+
+            for (const key in userArray) {
+                const element = userArray[key];
+
+                let template = `<tr>
+                <td>${atob(userArray[key].email)}</td>
+                <td>${atob(userArray[key].password)}</td>
+              </tr>`;
+
+                container.insertAdjacentHTML('beforeend', template);
+            }
+            
+          }
+
+          
+          
+        }
+      }
+
+      return self;
+    })(); //closure qui s'appelle elle même ()
+
+
+    Shaker.init();
+  </script>
+</body>
+
+</html>
