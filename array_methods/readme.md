@@ -4,3 +4,4 @@
 2 - La méthode Foreach() <br>
 3 - La méthode Includes() <br>
 4 - La méthode Filter() <br>
+5 - La méthode Some() <br>
