@@ -8,3 +8,4 @@
 6 - La méthode concat() <br>
 7 - La méthode map() <br>
 8 - La méthode pop() <br>
+9 - La méthode push() <br>
