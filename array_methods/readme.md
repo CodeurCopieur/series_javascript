@@ -7,3 +7,4 @@
 5 - La méthode some() <br>
 6 - La méthode concat() <br>
 7 - La méthode map() <br>
+8 - La méthode pop() <br>
