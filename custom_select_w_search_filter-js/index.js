@@ -31,7 +31,6 @@ function createCustomDrompdown(dropdown) {
   // obtenir toutes les options et les convertir de nodelist en tableau
   const options = dropdown.querySelectorAll('option');
   const optionsArr = Array.prototype.slice.call(options);
-  console.log(optionsArr);
 
   // créer un élément de liste déroulante personnalisé et y ajouter une liste déroulante de classe
   //insérez-le dans le DOM après le champ de sélection
@@ -48,17 +47,17 @@ function createCustomDrompdown(dropdown) {
   customDropdown.appendChild(selected);
 
   // créer un élément pour le menu déroulant, y ajouter une classe et l'ajouter à la liste déroulante personnalisée ->  (va contenir un input et un wrapper d'items(dropdown__menu_items) > (dropdown__menu_item))
-  // ajouter un événement de clic à l'élément sélectionné pour basculer le menu déroulant
   const menu = document.createElement('div');
   menu.classList.add('dropdown__menu');
   customDropdown.appendChild(menu);
-  selected.addEventListener('click', () => console.log('oui'));
-  // toggleDropdown.bind(menu)
+
+  // ajouter un événement de clic à l'élément sélectionné pour basculer le menu déroulant
+  selected.addEventListener('click', toggleDropdown.bind(menu));
 
   // créer un élément d'entrée de recherche
-  // ajouter une class, un type et placeholder à cet élément et l'ajouter à l'élément de menu
-
   const search = document.createElement('input');
+
+  // ajouter une class, un type et placeholder à cet élément et l'ajouter à l'élément de menu
   search.placeholder = 'search...';
   search.type = 'text';
   search.className = 'dropdown__menu_search';
@@ -71,16 +70,75 @@ function createCustomDrompdown(dropdown) {
 
   // parcourir toutes les options et créer une option personnalisée pour chaque option et l'ajouter à l'élément wrapper des éléments
   optionsArr.forEach( option => {
-    const item = document.createElement('div');
+    var item = document.createElement('div');
     item.className = 'dropdown__menu_item';
     item.dataset.value = option.value;
     item.textContent = option.textContent;
     menuItemsWrapper.appendChild(item);
 
-    item.addEventListener('click', () => console.log('oui'));
-    //setSelected.bind(item, selected, dropdown, menu)
+    item.addEventListener('click', setSelected.bind(item, selected, dropdown, menu));
   });
 
   // ajouter la class sélectionnée à la première option personnalisée
-  menuItemsWrapper.querySelector('div').className = 'selected';
+  menuItemsWrapper.querySelector('div').className += ' selected';
+
+  // ajouter un événement d'entrée pour rechercher un élément d'entrée pour filtrer les éléments
+  search.addEventListener('input', filterItems.bind(search));
+
+  // ajouter un événement de clic à l'élément de document pour fermer la liste déroulante personnalisée si vous cliquez en dehors de celui-ci
+  document.addEventListener('click', closeIfClickedOutside.bind(customDropdown, menu));
+
+  // masquer la liste déroulante d'origine (sélectionner)
+  dropdown.style.display = 'none';
+
+}
+
+// Toggle dropdown
+function toggleDropdown() {
+  console.log(this.offsetParent);
+  // vérifiez si la liste déroulante est ouverte et si elle est fermée, sinon ouvrez-la et focus sur l'input de recherche
+  if (this.offsetParent !== null) {
+    this.style.display = 'none';
+  } else {
+    this.style.display = 'block';
+    this.querySelector('input').focus();
+  }
+
+}
+
+// définir l'option sélectionnée
+function setSelected(selected, dropdown, menu) {
+  // obtenir la valeur et l'étiquette de l'option personnalisée cliquée
+  var value = this.dataset.value;
+  var label = this.textContent;
+
+  // modifier le texte sur l'élément sélectionné
+  selected.textContent = label;
+  // changer la valeur sur le champ sélectionné
+  dropdown.value = value;
+
+  // fermer le menu
+  menu.style.display = 'none';
+  // réinitialiser la valeur d'entrée de la recherche
+  menu.querySelector('input').value = '';
+  // supprimer la classe sélectionnée de l'option précédemment sélectionnée et afficher toutes les divs si elles ont été filtrées
+  menu.querySelectorAll('div').forEach( div => {
+    if(div.classList.contains('selected')) {
+      div.classList.remove('selected');
+    }
+
+    if(div.offsetParent === null) {
+      div.style.display = 'block';
+    }
+  })
+  // ajouter la classe sélectionnée à l'option cliquée
+  this.className += ' selected';
+}
+
+function filterItems(params) {
+  console.log(params);
+}
+
+function closeIfClickedOutside(params) {
+  console.log(params);
 }
