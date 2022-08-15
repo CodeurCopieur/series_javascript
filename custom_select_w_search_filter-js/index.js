@@ -83,7 +83,7 @@ function createCustomDrompdown(dropdown) {
   menuItemsWrapper.querySelector('div').className += ' selected';
 
   // ajouter un événement d'entrée pour rechercher un élément d'entrée pour filtrer les éléments
-  search.addEventListener('input', filterItems.bind(search));
+  search.addEventListener('input', filterItems.bind(search, optionsArr, menu));
 
   // ajouter un événement de clic à l'élément de document pour fermer la liste déroulante personnalisée si vous cliquez en dehors de celui-ci
   document.addEventListener('click', closeIfClickedOutside.bind(customDropdown, menu));
@@ -135,10 +135,32 @@ function setSelected(selected, dropdown, menu) {
   this.className += ' selected';
 }
 
-function filterItems(params) {
-  console.log(params);
+// filtrer les éléments
+function filterItems(itemArray, menu) {
+  console.log(this.value);
+  // obtenir toutes les options personnalisées
+  const customOptions = menu.querySelectorAll('.dropdown__menu_items div');
+  // obtenir la valeur de recherche et  convertir tous les caractères minuscules
+  const value = this.value.toLowerCase();
+  // obtenir des éléments filtrés
+  const filteredItems = itemArray.filter( item => item.value.toLowerCase().includes(value));
+  // obtenir les index des éléments filtrés
+  const indexesArray = filteredItems.map( item => itemArray.indexOf(item));
+
+  itemArray.forEach( option => {
+    if( !indexesArray.includes(itemArray.indexOf(option)) ) {
+      customOptions[itemArray.indexOf(option)].style.display = 'none';
+    } else {
+      if(customOptions[itemArray.indexOf(option)].offsetParent === null) {
+        customOptions[itemArray.indexOf(option)].style.display = 'block';
+      }
+    }
+  })
 }
 
-function closeIfClickedOutside(params) {
-  console.log(params);
+// Fermer la liste déroulante si cliqué en dehors de l'élément déroulant
+function closeIfClickedOutside(menu, e) {
+  if( e.target.closest('.dropdown') === null && e.target !== this && menu.offsetParent !== null ) {
+    menu.style.display = 'none';
+  }
 }
