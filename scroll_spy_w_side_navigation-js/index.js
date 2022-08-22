@@ -1,22 +1,22 @@
 const sections = [...document.querySelectorAll('.content-section')];
 const links = [...document.querySelectorAll('nav a')];
+const content = document.querySelector('.content');
 
 window.addEventListener('load', () => {
   // tableau d'offset de chaque section
-  let data = sections.map( (section) => section.offsetTop );
+  let data = sections.map(section => section.offsetTop );
   
   // Resize Observer
   let firstLoad = true;
   function handleResize() {
     if(!firstLoad) {
-      data = sections.map( (section) => section.offsetTop );
-      firstLoad = false;
+      data = sections.map(section => section.offsetTop );
     }
-    
+    firstLoad = false;
   }
 
   const resizeObserver = new ResizeObserver(handleResize);
-  resizeObserver.observe(document.querySelector('.content'))
+  resizeObserver.observe(content)
 
   links.forEach( (link, i) => {
     link.addEventListener('click', (e) => {
