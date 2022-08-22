@@ -3,8 +3,20 @@ const links = [...document.querySelectorAll('nav a')];
 
 window.addEventListener('load', () => {
   // tableau d'offset de chaque section
-  const data = sections.map( (section) => section.offsetTop );
-  console.log(data);
+  let data = sections.map( (section) => section.offsetTop );
+  
+  // Resize Observer
+  let firstLoad = true;
+  function handleResize() {
+    if(!firstLoad) {
+      data = sections.map( (section) => section.offsetTop );
+      firstLoad = false;
+    }
+    
+  }
+
+  const resizeObserver = new ResizeObserver(handleResize);
+  resizeObserver.observe(document.querySelector('.content'))
 
   links.forEach( (link, i) => {
     link.addEventListener('click', (e) => {
@@ -30,8 +42,8 @@ window.addEventListener('load', () => {
       if(index !== saveIndex) {
         saveIndex = index;
         addClassAndClear(index)
-        break;
       }
+      break;
     }
 
     if( index === data.length - 1 && trigger >= data[index]) {
