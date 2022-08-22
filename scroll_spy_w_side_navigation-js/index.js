@@ -7,16 +7,31 @@ window.addEventListener('load', () => {
   let data = sections.map(section => section.offsetTop );
   
   // Resize Observer
+  const resizeObserver = new ResizeObserver(handleResize);
+  resizeObserver.observe(content);
+
   let firstLoad = true;
   function handleResize() {
-    if(!firstLoad) {
-      data = sections.map(section => section.offsetTop );
-    }
+    if(!firstLoad) data = sections.map(section => section.offsetTop );
     firstLoad = false;
   }
 
-  const resizeObserver = new ResizeObserver(handleResize);
-  resizeObserver.observe(content)
+  // Intersection Observer
+  const intersectionObserver = new IntersectionObserver(startWatching, {rootMargin: "10% 0px"});
+  intersectionObserver.observe(content);
+
+  function startWatching(entries) {
+    if(entries[0].isIntersecting) {
+      window.addEventListener('scroll', handleScroll);
+    } else if(!entries[0].isIntersecting) {
+      const elToClean = links.find( link => link.className.includes('marked'));
+      if (elToClean) {
+        elToClean.classList.remove('marked');
+      }
+      saveIndex = undefined;
+      window.removeEventListener('scroll', handleScroll);
+    }
+  }
 
   links.forEach( (link, i) => {
     link.addEventListener('click', (e) => {
@@ -29,7 +44,7 @@ window.addEventListener('load', () => {
     })
   });
 
-  window.addEventListener('scroll', handleScroll);
+  // window.addEventListener('scroll', handleScroll);
 
   let saveIndex;
   function handleScroll() {
