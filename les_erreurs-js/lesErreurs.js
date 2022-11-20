@@ -2,7 +2,7 @@ class Rectangle {
   constructor(w, h) {
 
     if(w <= 0 || h <=0) {
-      throw new Error('Forme avecdes dimension négatives')
+      throw new Error('Forme avec des dimensions négatives(détails)')
     }
 
     this.w = w,
@@ -28,12 +28,40 @@ class Square extends Rectangle{
   }
 }
 
-const r = new Rectangle(10, 20);
-console.log(r.perimetre);
-console.log(r.isValid);
-const r2 = new Rectangle(-10, 20);
-console.log(r2.perimetre);
-console.log(r2.isValid);
-const r3 = new Square(20);
-console.log(r3.perimetre);
-console.log(r.isBiggerThan(r3));
+// avoir des erreurs avec détails
+
+function promptRectangle() {
+  try {
+    // const r = new Rectangle(10, 20);
+    // const r2 = new Rectangle(-10, 20);
+  
+    const w = parseInt(prompt('largeur'))
+    const h = parseInt(prompt('hauteur'))
+    const r = new Rectangle(w, h);
+    console.log('Voici ton périmetre : ', r.perimetre);
+  } catch (e) {
+    throw new Error('Entrée Invalide(détails)', { cause: e})
+  }
+}
+
+try {
+  promptRectangle()
+} catch (error) {
+  console.log(error.message, {error});
+}
+
+// try {
+//   // const r = new Rectangle(10, 20);
+//   // const r2 = new Rectangle(-10, 20);
+
+//   const w = parseInt(prompt('largeur'))
+//   const h = parseInt(prompt('hauteur'))
+//   const r = new Rectangle(w, h);
+//   console.log(r.perimetre);
+// } catch (e) {
+//   console.log(e.message);
+// }
+
+// console.log('hello');
+
+
