@@ -9,11 +9,28 @@
 <body>
   
   <script type="module">
-    import {sum, hello} from './array.js';
-
-
+    import {sum, hello, testBonjour} from './array.js'; // meilleur
+    import * as A from './array.js';
+    
+    // export par default
+    import dft from './hello.js'
+    // nommer export par default
+    import { default as Test} from './array.js'
+    
     console.log(sum([18, 13, 10]), 'lol');
     hello()
+
+    // A : object qui va contenir les exports
+    console.log(A.sum([18, 13, 10]));
+    A.hello()
+
+    // dft
+    dft()
+    // Test
+    Test()
+
+    testBonjour()
+
   </script>
 </body>
 </html>
