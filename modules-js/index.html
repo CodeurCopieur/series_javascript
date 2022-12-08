@@ -10,27 +10,37 @@
   
   <script type="module">
     import {sum, hello, testBonjour} from './array.js'; // meilleur
-    import * as A from './array.js';
-    
-    // export par default
-    import dft from './hello.js'
-    // nommer export par default
-    import { default as Test} from './array.js'
-    
     console.log(sum([18, 13, 10]), 'lol');
     hello()
+    testBonjour() // fonction dans hello.js
 
     // A : object qui va contenir les exports
+    import * as A from './array.js';
+    
     console.log(A.sum([18, 13, 10]));
     A.hello()
 
-    // dft
+
+    // export par default
+    import dft from './hello.js'
     dft()
-    // Test
+
+    // nommer export par default
+    import { default as Test} from './array.js'
     Test()
+    
 
-    testBonjour()
+    //Import asynchrone
+    import('./async.js').then((...args) => console.log(args)) // tableau contenant les exports
+    import('./async.js').then(({asy}) => asy()) //appeler la function asy
 
+    const {asy2} = await import('./async.js')
+    asy2();
+
+    (async function() {
+      const {asy3} = await import('./async.js')
+      asy3()
+    })()
   </script>
 </body>
 </html>
