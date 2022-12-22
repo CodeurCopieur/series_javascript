@@ -11,3 +11,4 @@
 9 - La méthode push() <br>
 10 - La méthode reverse() <br>
 10 - La méthode shift() <br>
+11 - La méthode sort() <br>
