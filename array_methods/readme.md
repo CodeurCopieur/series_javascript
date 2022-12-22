@@ -9,3 +9,4 @@
 7 - La méthode map() <br>
 8 - La méthode pop() <br>
 9 - La méthode push() <br>
+10 - La méthode reverse() <br>
