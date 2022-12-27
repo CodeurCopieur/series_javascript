@@ -12,24 +12,50 @@ class Tooltip {
   constructor(elt) {
     this.elt = elt
     this.title = elt.getAttribute('title')
-    this.toolip = null
+    this.tooltip = null
     this.elt.addEventListener('mouseover', this.mouseOver.bind(this))
     this.elt.addEventListener('mouseout', this.mouseOut.bind(this))
     // this est object qui va contenir elt, title, tootip
   }
 
   mouseOver() {
-    let toolip = document.createElement('div')
-    toolip.innerHTML = this.title
-    document.body.appendChild(toolip)
-    this.toolip = toolip
-    // debugger log this
+    let tooltip = this.createTooltip()
+    let w = this.tooltip.offsetWidth
+    let h = this.tooltip.offsetHeight
+    let l = this.elt.offsetWidth / 2 - w / 2 + this.elt.getBoundingClientRect().left + document.documentElement.scrollLeft
+    let t = this.elt.getBoundingClientRect().top - h - 15 + document.documentElement.scrollTop
+    tooltip.style.left = l+"px"
+    tooltip.style.top = t+"px"
+    tooltip.classList.add('visible')
+    // debugger 
+    // log this
   }
 
   mouseOut() {
-    if (this.toolip !== null) {
-      document.body.removeChild(this.toolip)
+    if (this.tooltip !== null) {
+      
+      this.tooltip.classList.remove('visible')
+      this.tooltip.addEventListener('transitionend', ()=> {
+        document.body.removeChild(this.tooltip)
+        this.tooltip = null
+      })
+      
     }
+  }
+
+  /**
+   * Créer et injecte la div dans le DOM
+   * @returns {HTMLElement}
+   */
+  createTooltip() {
+    if(this.tooltip === null){
+      let tooltip = document.createElement('div')
+      tooltip.innerHTML = this.title
+      tooltip.classList.add('tooltip')
+      document.body.appendChild(tooltip)
+      this.tooltip = tooltip
+    }
+    return this.tooltip
   }
 }
 
