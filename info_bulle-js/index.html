@@ -31,20 +31,27 @@
 
     <div class="bg-white shadow-lg cursor-pointer">
       <a href="#" title="Mon titre test 2">
-        <img src="./01.jpg" alt="" class="">
+        <img src="./02.jpg" alt="" class="">
         <div class="p-4">
           <div class="flex mb-5">
             <h3 class="text-2xl text-gray-700">Titre 2</h3>
             <p class="mt-1 ml-auto text-lg font-medium text-gray-900">48€</p>
           </div>
-          <span title="Mon titre test 2" class="inline-flex items-center px-5 py-1 shadow-sm font-medium bg-red-600">
-            <span class="text-gray-100 text-lg">Buy</span>
-          </span>
+          <a data-tooltip="#tooltip-content" title="Mon titre test 2" class="inline-flex items-center px-5 py-1 shadow-sm font-medium bg-red-600 text-gray-100 text-lg">
+            Buy
+          </a>
         </div>
       </a>
     </div>
+    <div id="tooltip-content" style="display: none;">
+      <div class="flex mb-5">
+        <h3 class="text-2xl text-gray-700">tooltip-content</h3>
+        <p class="mt-1 ml-auto text-lg font-medium text-gray-900">48€</p>
+      </div>
+      <img src="./03.jpg" width="318" height="180" alt="" class="w-full h-auto">
+    </div>
   </section>
 
-  <script src="./build/index.js"></script>
+  <script src="./index.js"></script>
 </body>
 </html>
