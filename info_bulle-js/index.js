@@ -11,7 +11,13 @@ class Tooltip {
    */
   constructor(elt) {
     this.elt = elt
-    this.title = elt.getAttribute('title')
+    let tooltipTarget = elt.getAttribute('data-tooltip')
+    if (tooltipTarget) {
+      this.title = document.querySelector(tooltipTarget).innerHTML
+    } else {
+      this.title = elt.getAttribute('title')
+    }
+    
     this.tooltip = null
     this.elt.addEventListener('mouseover', this.mouseOver.bind(this))
     this.elt.addEventListener('mouseout', this.mouseOut.bind(this))
@@ -24,6 +30,11 @@ class Tooltip {
     let h = this.tooltip.offsetHeight
     let l = this.elt.offsetWidth / 2 - w / 2 + this.elt.getBoundingClientRect().left + document.documentElement.scrollLeft
     let t = this.elt.getBoundingClientRect().top - h - 15 + document.documentElement.scrollTop
+
+    if(l < 20) {
+      l = 20
+    }
+
     tooltip.style.left = l+"px"
     tooltip.style.top = t+"px"
     tooltip.classList.add('visible')
@@ -36,8 +47,11 @@ class Tooltip {
       
       this.tooltip.classList.remove('visible')
       this.tooltip.addEventListener('transitionend', ()=> {
-        document.body.removeChild(this.tooltip)
-        this.tooltip = null
+
+        if (this.tooltip !== null)  {
+          document.body.removeChild(this.tooltip)
+          this.tooltip = null
+        }
       })
       
     }
