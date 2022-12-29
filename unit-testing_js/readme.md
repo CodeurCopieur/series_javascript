@@ -7,3 +7,7 @@ Créer 3 tests unitaires sur une fonction de notre codebase.
  touch utils.js
  npm i vitest
  touch utils.test.js
+
+ verifier le test
+
+ npm run test
