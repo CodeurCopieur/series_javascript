@@ -7,7 +7,11 @@
  */
 export function createElt( tagName, attributes = {}, text) {
   const elt = document.createElement(tagName)
-  elt.innerText = text;
+  
+  if(text){
+    elt.innerText = text
+  }
+    
   for (const [attribute, value] of Object.entries(attributes)) {
     elt.setAttribute(attribute, value)
   }
