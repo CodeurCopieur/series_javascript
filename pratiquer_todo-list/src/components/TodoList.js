@@ -1,4 +1,4 @@
-import { createElt } from './functions/dom.js';
+import { createElt } from '../functions/dom.js';
 
 /**
  * @export
@@ -56,6 +56,8 @@ export class TodoList {
 
 export class TodoListItem {
 
+  #elt
+
   /** @type {Todo} */
   constructor(todo) {
     const id = `todo-${todo.id}`
@@ -69,5 +71,13 @@ export class TodoListItem {
     li.append(inputCheckbox)
     li.append(label)
     li.append(button)
+    this.#elt = li
+  }
+
+  /**
+   * @param {HTMLElement} element
+   */
+  appendTo(elt) {
+
   }
 }
