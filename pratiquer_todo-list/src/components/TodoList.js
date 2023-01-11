@@ -37,20 +37,15 @@ export class TodoList {
             <button type="button" class=" btn btn-outline-primary" data-filter="done">Faites</button>
         </div>
 
-        <ul class="list-group">
-            <li class="todo list-group-item d-flex align-items-center">
-                <input class="form-check-input" type="checkbox" id="todo-1">
-                <label class="ms-2 form-check-label" for="todo-1">
-                    Tâche à faire 2
-                </label>
-                <label class="ms-auto btn btn-danger btn-sm">
-                <i class="bi-trash">
-                </i>
-                </label>
-            </li>
-        </ul>
+        <ul class="list-group"></ul>
     </main>
     `
+    
+    const listGroup = elt.querySelector('.list-group')
+    for (let todo of this.#todos) {
+      const t = new TodoListItem(todo)
+      t.appendTo(listGroup)
+    }
   }
 }
 
@@ -78,6 +73,6 @@ export class TodoListItem {
    * @param {HTMLElement} element
    */
   appendTo(elt) {
-
+    elt.append(this.#elt)
   }
 }
