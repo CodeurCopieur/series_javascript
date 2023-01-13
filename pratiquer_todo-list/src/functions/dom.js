@@ -13,7 +13,11 @@ export function createElt( tagName, attributes = {}, text) {
   }
     
   for (const [attribute, value] of Object.entries(attributes)) {
-    elt.setAttribute(attribute, value)
+    
+    if (value !== null) {
+      elt.setAttribute(attribute, value)
+    }
+    
   }
   return elt
 }

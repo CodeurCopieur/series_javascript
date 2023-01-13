@@ -58,7 +58,7 @@ export class TodoListItem {
     const id = `todo-${todo.id}`
     // create li, the checkbox type input, label, button
     const li = createElt('li', {class: 'todo list-group-item d-flex align-items-center'})
-    const inputCheckbox = createElt('input', { type:'checkbox', class: 'form-check-input', id})
+    const inputCheckbox = createElt('input', { type:'checkbox', class: 'form-check-input', id, checked: todo.completed ? '' : null })
     const label = createElt('label', {class: 'ms-2 form-check-label', for: id}, todo.title)
     const button = createElt('button', {class: 'ms-auto btn btn-danger btn-sm'})
     button.innerHTML = '<i class="bi-trash"></i>'
@@ -66,6 +66,9 @@ export class TodoListItem {
     li.append(inputCheckbox)
     li.append(label)
     li.append(button)
+
+    button.addEventListener('click', e => this.remove(e))
+
     this.#elt = li
   }
 
@@ -74,5 +77,14 @@ export class TodoListItem {
    */
   appendTo(elt) {
     elt.append(this.#elt)
+  }
+
+  /**
+   * 
+   * @param {PointEvent} e 
+   */
+  remove(e) {
+    e.preventDefault();
+    this.#elt.remove();
   }
 }
