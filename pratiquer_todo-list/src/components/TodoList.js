@@ -14,6 +14,9 @@ export class TodoList {
   /** @type {Todo[]} */
   #todos = []
 
+  /** @type {HTMLULELEMNT} */
+  #listElt
+
   /**
    * @param {Todo[]} todos
    */
@@ -41,11 +44,37 @@ export class TodoList {
     </main>
     `
     
-    const listGroup = elt.querySelector('.list-group')
+    this.#listElt = elt.querySelector('.list-group')
     for (let todo of this.#todos) {
       const t = new TodoListItem(todo)
-      t.appendTo(listGroup)
+      t.appendTo(this.#listElt)
     }
+
+    const form = elt.querySelector('form');
+
+    form.addEventListener('submit', e => this.onSubmit(e))
+  }
+
+  /**
+   * 
+   * @param {SubmitEvent} e 
+   */
+  onSubmit(e) {
+    e.preventDefault();
+    const title = new FormData(e.currentTarget).get('title').toString().trim();
+
+    if (title === '') {
+      return
+    }
+
+    const todo = {
+      id: Date.now(),
+      title,
+      completed: false
+    }
+
+    const item = new TodoListItem(todo)
+    item.appendTo(this.#listElt)
   }
 }
 
