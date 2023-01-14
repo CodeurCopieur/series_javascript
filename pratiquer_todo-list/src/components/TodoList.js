@@ -92,6 +92,7 @@ export class TodoListItem {
     const id = `todo-${todo.id}`
     // create li, the checkbox type input, label, button
     const li = createElt('li', {class: 'todo list-group-item d-flex align-items-center'})
+    this.#elt = li
     const inputCheckbox = createElt('input', { type:'checkbox', class: 'form-check-input', id, checked: todo.completed ? '' : null })
     const label = createElt('label', {class: 'ms-2 form-check-label', for: id}, todo.title)
     const button = createElt('button', {class: 'ms-auto btn btn-danger btn-sm'})
@@ -102,8 +103,9 @@ export class TodoListItem {
     li.append(button)
 
     button.addEventListener('click', e => this.remove(e))
-
-    this.#elt = li
+    inputCheckbox.addEventListener('change', e => this.toggle(e.currentTarget))
+    this.toggle(inputCheckbox)
+  
   }
 
   /**
@@ -123,5 +125,17 @@ export class TodoListItem {
   remove(e) {
     e.preventDefault();
     this.#elt.remove();
+  }
+
+  /**
+   * Change l'état (à faire / fait) de la tâche
+   * @param {HTMLInputElement} checkbox 
+   */
+  toggle(checkbox) {
+      if(checkbox.checked) {
+        this.#elt.classList.add('is-completed')
+      } else {
+        this.#elt.classList.remove('is-completed')
+      }
   }
 }
