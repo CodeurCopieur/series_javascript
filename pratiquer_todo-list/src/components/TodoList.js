@@ -47,7 +47,8 @@ export class TodoList {
     this.#listElt = elt.querySelector('.list-group')
     for (let todo of this.#todos) {
       const t = new TodoListItem(todo)
-      t.appendTo(this.#listElt)
+      this.#listElt.append(t.elt)
+      // t.appendTo(this.#listElt)
     }
 
     const form = elt.querySelector('form');
@@ -61,7 +62,8 @@ export class TodoList {
    */
   onSubmit(e) {
     e.preventDefault();
-    const title = new FormData(e.currentTarget).get('title').toString().trim();
+    const form = e.currentTarget
+    const title = new FormData(form).get('title').toString().trim();
 
     if (title === '') {
       return
@@ -74,7 +76,10 @@ export class TodoList {
     }
 
     const item = new TodoListItem(todo)
-    item.appendTo(this.#listElt)
+    this.#listElt.prepend(item.elt)
+    // item.appendTo(this.#listElt)
+
+    form.reset()
   }
 }
 
@@ -102,11 +107,14 @@ export class TodoListItem {
   }
 
   /**
-   * @param {HTMLElement} element
+   * @return {HTMLElement} element
    */
-  appendTo(elt) {
-    elt.append(this.#elt)
+  get elt() {
+    return this.#elt
   }
+  // appendTo(elt) {
+  //   elt.append(this.#elt)
+  // }
 
   /**
    * 
