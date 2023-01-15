@@ -52,15 +52,19 @@ export class TodoList {
     }
 
     const form = elt.querySelector('form');
+    const allBtn = elt.querySelectorAll('.btn-group button');
 
-    form.addEventListener('submit', e => this.onSubmit(e))
+    form.addEventListener('submit', e => this.#onSubmit(e))
+    allBtn.forEach(btn => {
+      btn.addEventListener('click', e => this.#toggleFilter(e))
+    });
   }
 
   /**
    * 
    * @param {SubmitEvent} e 
    */
-  onSubmit(e) {
+  #onSubmit(e) {
     e.preventDefault();
     const form = e.currentTarget
     const title = new FormData(form).get('title').toString().trim();
@@ -80,6 +84,29 @@ export class TodoList {
     // item.appendTo(this.#listElt)
 
     form.reset()
+  }
+
+  /**
+   * 
+   * @param {PointEvent} e 
+   */
+  #toggleFilter(e) {
+    e.preventDefault();
+
+    const dataFilter = e.currentTarget.getAttribute('data-filter');
+    e.currentTarget.parentElement.querySelector('.active').classList.remove('active')
+    e.currentTarget.classList.add('active')
+
+    if (dataFilter === 'todo') {
+      this.#listElt.classList.add('hide-completed')
+      this.#listElt.classList.remove('hide-todo')
+    } else if(dataFilter === 'done') {
+      this.#listElt.classList.add('hide-todo')
+      this.#listElt.classList.remove('hide-completed')
+    } else {
+      this.#listElt.classList.remove('hide-todo')
+      this.#listElt.classList.remove('hide-completed')
+    }
   }
 }
 
