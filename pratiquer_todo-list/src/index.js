@@ -16,6 +16,7 @@ try {
    */
   const div = createElt('div', {class: 'alert alert-danger', role: 'alert'}, 'Impossible de charger les éléments')
   document.body.prepend(div)
+  console.error(error);
 }
 
 
