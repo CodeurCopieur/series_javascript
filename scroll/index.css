@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 968px;
+  margin: 0 auto;
+}
+.container .item {
+  width: calc(100%/4 - 20px);
+  height: 250px;
+  background-color: crimson;
+  margin: 10px;
+}
+@media screen and (max-width: 968px) {
+  .container {
+    max-width: 100%;
+  }
+  .container .item {
+    width: calc(100%/2 - 20px);
+  }
+}
+
+/*# sourceMappingURL=index.css.map */
