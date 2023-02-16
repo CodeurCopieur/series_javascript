@@ -1,8 +1,6 @@
 const tabs = [...document.querySelectorAll('.tab')]
 const tabsContent = [...document.querySelectorAll('.tab-content')];
 
-console.log(tabs, tabsContent);
-
 tabs.forEach( tab => tab.addEventListener('click', tabsAnimation));
 
 function tabsAnimation(e) {
@@ -32,4 +30,33 @@ function tabsAnimation(e) {
   // ajouter les classes "active-tab" & "active-tab-content" w/ indexToShow
   tabs[indexToShow].classList.add('active-tab');
   tabsContent[indexToShow].classList.add('active-tab-content');
+}
+
+tabs.forEach( tab => tab.addEventListener('keydown', arrowNavigation));
+
+let tabFocus = 0;
+function arrowNavigation(e) {
+
+  //  Droite ou Gauche  
+  if (e.keyCode === 39 || e.keyCode === 37) {
+    tabs[tabFocus].setAttribute("tabindex", -1);
+
+    if (e.keyCode === 39) {
+      tabFocus++;
+
+      if (tabFocus >= tabs.length) {
+        tabFocus = 0;
+      } 
+
+    } else if (e.keyCode === 37) {
+      tabFocus--;
+
+      if (tabFocus < 0) {
+        tabFocus = tabs.length - 1;
+      } 
+    }
+
+    tabs[tabFocus].setAttribute("tabindex", 0);
+    tabs[tabFocus].focus();
+  } 
 }
