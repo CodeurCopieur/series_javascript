@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="content">
+    <h1>
+      Exo 1
+    </h1>
+  </div>
+  
+  <script>
+    console.log(new Date().toISOString());
+    console.log(new Date().toUTCString());
+    console.log(new Date().toLocaleDateString());
+    console.log(new Date().toLocaleDateString('en-US'));
+    console.log(new Date().toLocaleString());
+    console.log(new Date().toLocaleTimeString());
+
+
+    // exo 1
+    function addDays(date, nbDay) {
+      // console.log(date.getTime()); : Timestamp
+      const newDate = new Date(date.getTime()) 
+      newDate.setDate(newDate.getDate() + nbDay);
+      return newDate
+    }
+
+    const today = new Date();
+    const tomorow = addDays(today, 1);
+
+    console.log(today, tomorow);
+  </script>
+</body>
+</html>
