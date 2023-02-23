@@ -51,8 +51,10 @@
     const MONTHS = 1;
     const DAYS = 2;
     const YEARS = 0;
+    const MINUTES = 4;
 
-    function addInterval(date, nbDay, unit) {
+    // function addInterval(date, nbDay, unit) {
+
       // 1er solution
       // const newDate = new Date(date.getTime()) 
       // switch (unit) {
@@ -68,13 +70,23 @@
       // }
 
       // 2eme solution
-        const parts = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()];
-        parts[unit] += nbDay;
+      // const parts = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()];
+      // parts[unit] += nbDay;
+      // return new Date(...parts);
+
+    // }
+
+    function addInterval(date, interval) {
+      const parts = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()];
+      for (const [unit, value] of Object.entries(interval)) {
+        parts[unit] += value;
+        
+      }
       return new Date(...parts);
     }
 
-    const future = addInterval(today, 1, YEARS);
-    second.innerHTML = `Today : ${today} - Tomorow : ${future}`
+    const future = addInterval(today, { [MONTHS]: 2, [YEARS]: 1, [MINUTES]: 3});
+    second.innerHTML = `Today : ${today} - Tomorow : ${future}`;
   </script>
 </body>
 </html>
