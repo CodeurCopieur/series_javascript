@@ -12,6 +12,11 @@
     <h1>
       Exo 1
     </h1>
+    <span id="First"></span>
+    <h1>
+      Exo 2
+    </h1>
+    <span id="Second"></span>
   </div>
   
   <script>
@@ -22,6 +27,9 @@
     console.log(new Date().toLocaleString());
     console.log(new Date().toLocaleTimeString());
 
+    var first = document.querySelector('#First')
+    var second = document.querySelector('#Second')
+    const today = new Date();
 
     // exo 1
     function addDays(date, nbDay) {
@@ -31,10 +39,35 @@
       return newDate
     }
 
-    const today = new Date();
+    
     const tomorow = addDays(today, 1);
 
-    console.log(today, tomorow);
+    first.innerHTML = `Today : ${today} - Tomorow : ${tomorow}`
+
+    // exo 2
+    const MONTHS = 'months';
+    const DAYS = 'days';
+    const YEARS = 'years';
+
+    function addInterval(date, nbDay, unit) {
+      // console.log(date.getTime()); : Timestamp
+      const newDate = new Date(date.getTime()) 
+      switch (unit) {
+        case DAYS:
+          newDate.setDate(newDate.getDate() + nbDay);
+          break;
+        case MONTHS:
+          newDate.setMonth(newDate.getMonth() + nbDay);
+          break;
+        case YEARS:
+          newDate.setFullYear(newDate.getFullYear() + nbDay);
+          break;
+      }
+      return newDate;
+    }
+
+    const future = addInterval(today, 3, YEARS);
+    second.innerHTML = `Today : ${today} - Tomorow : ${future}`
   </script>
 </body>
 </html>
