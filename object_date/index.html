@@ -45,28 +45,35 @@
     first.innerHTML = `Today : ${today} - Tomorow : ${tomorow}`
 
     // exo 2
-    const MONTHS = 'months';
-    const DAYS = 'days';
-    const YEARS = 'years';
+    // const MONTHS = 'months';
+    // const DAYS = 'days';
+    // const YEARS = 'years';
+    const MONTHS = 1;
+    const DAYS = 2;
+    const YEARS = 0;
 
     function addInterval(date, nbDay, unit) {
-      // console.log(date.getTime()); : Timestamp
-      const newDate = new Date(date.getTime()) 
-      switch (unit) {
-        case DAYS:
-          newDate.setDate(newDate.getDate() + nbDay);
-          break;
-        case MONTHS:
-          newDate.setMonth(newDate.getMonth() + nbDay);
-          break;
-        case YEARS:
-          newDate.setFullYear(newDate.getFullYear() + nbDay);
-          break;
-      }
-      return newDate;
+      // 1er solution
+      // const newDate = new Date(date.getTime()) 
+      // switch (unit) {
+      //   case DAYS:
+      //     newDate.setDate(newDate.getDate() + nbDay);
+      //     break;
+      //   case MONTHS:
+      //     newDate.setMonth(newDate.getMonth() + nbDay);
+      //     break;
+      //   case YEARS:
+      //     newDate.setFullYear(newDate.getFullYear() + nbDay);
+      //     break;
+      // }
+
+      // 2eme solution
+        const parts = [date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()];
+        parts[unit] += nbDay;
+      return new Date(...parts);
     }
 
-    const future = addInterval(today, 3, YEARS);
+    const future = addInterval(today, 1, YEARS);
     second.innerHTML = `Today : ${today} - Tomorow : ${future}`
   </script>
 </body>
