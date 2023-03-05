@@ -2,10 +2,14 @@ const menu = document.querySelector('.menu');
 const menuItems = Array.from(menu.querySelectorAll('a'));
 let activeItem = menu.querySelector('[aria-selected]')
 
+// eviter les querySelector()
+const indicators = new Map()
+
 menuItems.forEach( item => {
-  const indicator = document.createElement('span');
-  indicator.classList.add('indicator'); 
-  item.appendChild(indicator)
+  const span = document.createElement('span');
+  span.classList.add('indicator'); 
+  indicators.set(item, span)
+  item.appendChild(span)
 })
 
 /**
@@ -40,8 +44,10 @@ function onItemClick(e) {
   e.currentTarget.setAttribute('aria-selected', 'true')
 
   if (activeItem) {
-    const prevIndicator =  activeItem.querySelector('.indicator');
-    const currentIndicator = e.currentTarget.querySelector('.indicator');
+    // const prevIndicator =  activeItem.querySelector('.indicator');
+    // const currentIndicator = e.currentTarget.querySelector('.indicator');
+    const prevIndicator =  indicators.get(activeItem)
+    const currentIndicator = indicators.get(e.currentTarget)
 
     currentIndicator.animate([
       {transform: getTransform(prevIndicator, currentIndicator)},
