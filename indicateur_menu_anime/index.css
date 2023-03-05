@@ -10,6 +10,9 @@ body {
 }
 
 .menu a {
+  /* add */
+    position: relative;
+  /* add */
   padding: 1rem;
   text-decoration: none;
   color: #000;
@@ -21,12 +24,32 @@ body {
 }
 
 .indicator {
+  /* add */
+    right: 0;
+  /* add */
   bottom: 0;
   left: 0;
   position: absolute;
   height: 4px;
-  width: 100px;
+  /* width: 100px; */
   background-color: #5396EB;
   border-radius: 4px;
   transform-origin: 0 0;
+  opacity: 0;
+}
+
+[aria-selected] .indicator {
+  opacity: 1;
+}
+
+@media screen and (max-width: 500px){
+  .menu {
+    flex-direction: column;
+  }
+  .indicator {
+    top: 0;
+    right: auto;
+    width: 4px;
+    height: auto;
+  }
 }
