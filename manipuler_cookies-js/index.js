@@ -14,5 +14,20 @@ function getCookie(name) {
   return decodeURIComponent(value)
 }
 
+/**
+ * Créer ou modifie la valeur d'un cookie avec une durée spécifique
+ * @param {string} name 
+ * @param {string} value 
+ * @param {number} days 
+ */
+function setCookie(name, value, days) {
+  const date = new Date()
+  date.setFullYear(date.getFullYear() + days)
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${date.toUTCString()};`
+}
+
+setCookie('hello', 'frist cookie', 10)
+
 // "cookie1=valeur%20avec%20espace; cookie2=valeur2" : ajouter dans les cookies(navigateur)
 console.log(getCookie('cookie1'));
+console.log(getCookie('hello'));
