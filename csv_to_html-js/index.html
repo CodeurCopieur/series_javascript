@@ -5,6 +5,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CSV sous forme de tableau HTML</title>
+  <style>
+    table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 10px;
+  text-align: left;
+  border: solid 1px #ccc;
+}
+th {
+  background-color: #000;
+  color: #FFF;
+}
+
+tr:nth-child(2n+1) {
+  background-color: #eee;
+}
+  </style>
 </head>
 <body>
 
@@ -12,7 +31,18 @@
   <input type="file" accept=".csv" name="" id="picker">
 
   <!-- afficher les cv ici -->
-  <table id="table"></table>
+  <table>
+    <thead>
+      <tr>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Mdp</th>
+      </tr>
+  </thead>
+  <tbody  id="table">
+
+  </tbody>
+  </table>
 
   
   <script src="./index.js"></script>
