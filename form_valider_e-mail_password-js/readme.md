@@ -1,4 +1,4 @@
-# Comment valider un e-mail et un mot de passe en HTML CSS et JavaScript | Validation du formulaire
+# Comment valider un e-mail et un mot de passe en JavaScript | Validation du formulaire
 
 
 * Valider l'e-mail et le mot de passe du formulaire en utilisant du JavaScript
