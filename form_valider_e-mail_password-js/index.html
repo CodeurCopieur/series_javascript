@@ -4,13 +4,58 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Valider un e-mail et un mot de passe en JavaScript | Validation du formulaire</title>
+
+  <!-- CSS -->
   <link rel="stylesheet" href="./index.css">
+  <!-- Boxicons CSS -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
   
-  
+  <div class="container">
+    <header>Signup</header>
 
+    <form action="#">
+      <div class="field">
+        <div class="input-field email-field">
+          <input type="email" placeholder="Entrer votre Email">
+        </div>
+        <span class="error email-error">
+          <i class='bx bxs-error error-icon'></i>
+          <p class="error-text">Veuillez entrer un email valide</p>
+        </span>
+      </div>
+
+      <div class="field create-password">
+        <div class="input-field">
+          <input type="email" placeholder="Créer un mot de passe">
+          <i class="bx bx-hide show-hide"></i>
+        </div>
+        <span class="error password-error">
+          <i class='bx bxs-error error-icon'></i>
+          <p class="error-text">Veuillez entrer au moins 8 caractères avec un chiffre, un symbole, une minuscule et une majuscule</p>
+        </span>
+      </div>
+
+      <div class="field confirm-password">
+        <div class="input-field">
+          <input type="email" placeholder="Confirmez le mot de passe">
+          <i class="bx bx-hide show-hide"></i>
+        </div>
+        <span class="error cPassword-error">
+          <i class='bx bxs-error error-icon'></i>
+          <p class="error-text">Le mot de passe ne correspond pas</p>
+        </span>
+      </div>
+
+      <div class="input-field button">
+        <input type="button" value="Envoyer">
+      </div>
+    </form>
+  </div>
+
+  <!-- JS -->
   <script src="./index.js"></script>
 </body>
 </html>
