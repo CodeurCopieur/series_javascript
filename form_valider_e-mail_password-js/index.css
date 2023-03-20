@@ -67,6 +67,7 @@ form .input-field {
   margin-top: 6px;
   color: #d93025;
   font-size: .75rem;
+  display: none;
 }
 
 
