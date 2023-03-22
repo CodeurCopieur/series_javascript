@@ -70,7 +70,6 @@ form .input-field {
   display: none;
 }
 
-
 .error .error-icon {
   margin-right: 6px;
   font-size: 1rem;
@@ -99,4 +98,14 @@ form .input-field {
 
 .button input:hover {
   background-color: #0e4bf1;
+}
+
+/* error invalid */
+
+.invalid .error {
+  display: flex;
+}
+
+.invalid input {
+  border-color: #d93025;
 }
