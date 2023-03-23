@@ -37,7 +37,7 @@ var Shaker = (() => {
         }
 
         icon.classList.replace('bx-show','bx-hide') // replace une class par une autre changer d'icone
-          return pInput.type = "password"
+        return pInput.type = "password"
       })
     })
 
@@ -54,15 +54,31 @@ var Shaker = (() => {
 
     }
 
+    // Confirmer la validation du mot de passe
+    function confirmPass() {
+      if (passInput.value !== cPassInput.value || cPassInput.value === "") {
+        return cPassField.classList.add('invalid')
+      }
+
+      cPassField.classList.remove('invalid')
+    }
+
     // Fonction d'appel sur la soumission du formulaire
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       checkEmail()
       createPass()
+      confirmPass()
 
       // calling  function on key up
       emailInput.addEventListener('keyup', checkEmail)
       passInput.addEventListener('keyup', createPass)
+      cPassInput.addEventListener('keyup', confirmPass)
+
+
+      if( !emailField.classList.contains('invalid') && !passField.classList.contains('invalid') && !cPassField.classList.contains('invalid')) {
+        location.href = form.getAttribute('action')
+      }
     })
 
   }
