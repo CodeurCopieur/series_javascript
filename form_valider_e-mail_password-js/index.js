@@ -26,10 +26,43 @@ var Shaker = (() => {
       emailField.classList.remove('invalid')
     }
 
+    // masquer et afficher le mot de passe
+    const eyeIcons = Array.from(document.querySelectorAll('.show-hide'));
+    eyeIcons.forEach( icon => {
+      icon.addEventListener('click', () => {
+        const pInput = icon.parentElement.querySelector('input')
+        if (pInput.type === "password") {
+          icon.classList.replace('bx-hide', 'bx-show') // replace une class par une autre changer d'icone
+          return pInput.type = "text"
+        }
+
+        icon.classList.replace('bx-show','bx-hide') // replace une class par une autre changer d'icone
+          return pInput.type = "password"
+      })
+    })
+
+    // Validation du mot de passe
+    function createPass() {
+      const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+      if(!passInput.value.match(passwordPattern)) {
+        return passField.classList.add('invalid')
+      }
+
+      // Suppression de la classe invalide si le password correspond à passwordPattern
+      passField.classList.remove('invalid')
+
+    }
+
     // Fonction d'appel sur la soumission du formulaire
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       checkEmail()
+      createPass()
+
+      // calling  function on key up
+      emailInput.addEventListener('keyup', checkEmail)
+      passInput.addEventListener('keyup', createPass)
     })
 
   }
