@@ -3,3 +3,21 @@
   padding: 0;
   box-sizing: border-box;
 }
+.background {
+  z-index: -1;
+  background-size: cover;
+  background-image: linear-gradient(
+    rgba(30, 63, 121, 0.8), 
+    rgba(30, 63, 121, 0.8)
+    ),url('https://images.unsplash.com/photo-1678267361423-dbe60452dc4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1vZi10aGUtZGF5fHx8fGVufDB8fHx8&auto=format%2Ccompress&fit=crop&w=800&h=800');
+  filter: blur(1px);
+}
+
+.side-column {
+  background-size: cover;
+  background-position: 50%;
+  background-image: linear-gradient(
+    rgba(22, 45, 84, 0.8), 
+    rgba(22, 45, 84, 0.8)
+    ),url('https://images.unsplash.com/photo-1678267361423-dbe60452dc4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1vZi10aGUtZGF5fHx8fGVufDB8fHx8&auto=format%2Ccompress&fit=crop&w=800&h=800');
+}
