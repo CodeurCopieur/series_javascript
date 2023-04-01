@@ -44,7 +44,12 @@
         <div class="formGroup flex flex-col my-4">
           <label for="firstName">Prénom</label>
           <div class="flex items-center">
-            <input type="text" class="w-full border-b-2 border-black outline-none py-2" id="firstName">
+            <input 
+              required
+              minlength="2"
+              type="text" 
+              id="firstName"
+              class="w-full border-b-2 border-black outline-none py-2" >
             <span class="error-icon hidden -ml-6 text-red-700">
               <i class="fa-solid fa-circle-exclamation"></i>
             </span>
