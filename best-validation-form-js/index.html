@@ -35,7 +35,77 @@
       </div>
     </div>
     <div class="w-1/2 p-16 bg-white">
+      <h2 class="text-4xl font-bold">Inscription</h2>
+      <p class="my-8">Vous avez déjà un compte ? <a href="#" class="text-blue-700">Connectez-vous</a> plutôt ici.</p>
+      
+      <form action="" id="registrationForm">
 
+        <!-- Input Prénom -->
+        <div class="formGroup flex flex-col my-4">
+          <label for="firstName">Prénom</label>
+          <div class="flex items-center">
+            <input type="text" class="w-full border-b-2 border-black outline-none py-2" id="firstName">
+            <span class="error-icon hidden -ml-6 text-red-700">
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </span>
+            <span class="succes-icon hidden -ml-6 text-green-700">
+              <i class="fa-solid fa-circle-check"></i>
+            </span>
+          </div>
+          <div class="error text-red-700 py-2"></div>
+        </div>
+        <!-- Input Prénom -->
+
+        <!-- Input Adresse email -->
+        <div class="formGroup flex flex-col my-4">
+          <label for="email">Adresse email</label>
+          <div class="flex items-center">
+            <input type="email" class="w-full border-b-2 border-black outline-none py-2" id="email">
+            <span class="error-icon hidden -ml-6 text-red-700">
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </span>
+            <span class="succes-icon hidden -ml-6 text-green-700">
+              <i class="fa-solid fa-circle-check"></i>
+            </span>
+          </div>
+          <div class="error text-red-700 py-2"></div>
+        </div>
+        <!-- Input Adresse email -->
+
+        <!-- Input  Mot de passe -->
+        <div class="formGroup flex flex-col my-4">
+          <label for="password">Mot de passe</label>
+          <div class="flex items-center">
+            <input type="password" class="w-full border-b-2 border-black outline-none py-2" id="password">
+            <span class="error-icon hidden -ml-6 text-red-700">
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </span>
+            <span class="succes-icon hidden -ml-6 text-green-700">
+              <i class="fa-solid fa-circle-check"></i>
+            </span>
+          </div>
+          <div class="error text-red-700 py-2"></div>
+        </div>
+        <!-- Input Mot de passe -->
+
+        <!-- Input confirm mot de passe -->
+        <div class="formGroup flex flex-col my-4">
+          <label for="confirmPassword">Confirm password</label>
+          <div class="flex items-center">
+            <input type="password" class="w-full border-b-2 border-black outline-none py-2" id="confirmPassword">
+            <span class="error-icon hidden -ml-6 text-red-700">
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </span>
+            <span class="succes-icon hidden -ml-6 text-green-700">
+              <i class="fa-solid fa-circle-check"></i>
+            </span>
+          </div>
+          <div class="error text-red-700 py-2"></div>
+        </div>
+        <!-- Input confirm mot de passe -->
+
+        <button type="submit" class="px-8 py-2 mt-4 bg-green-400 w-full rounded-full text-white shadow-lg">s'inscrire</button>
+      </form>
     </div>
   </div>
 
