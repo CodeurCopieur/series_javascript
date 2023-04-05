@@ -4,7 +4,7 @@ const valForm = formSelect => {
   const validationOptions = [
     {
       attribute: 'required',
-      isValid: input => input.value.trim() !== '',
+      isValid: (input) => input.value.trim() !== '',
       errorMessage: (input, label) => `${label.textContent} est requis`
     }
   ]
@@ -16,6 +16,15 @@ const valForm = formSelect => {
     const errorIcon = formGroup.querySelector('.error-icon');
     const successIcon = formGroup.querySelector('.success-icon');
     
+    for(const option of validationOptions) {
+      
+      // l'input contient attribut required && qu'il n'est pas valid
+      if (input.hasAttribute(option.attribute) && !option.isValid(input)) {
+        // afficher le texte d'erreur dans l'élément html
+        errorContainer.textContent = option.errorMessage(input, label)
+        
+      }
+    }
   }
 
   formElt.setAttribute('novalidate', ''),
@@ -23,7 +32,6 @@ const valForm = formSelect => {
     e.preventDefault();
     validAllFormGroups(formElt)
   });
-  
   
   const validAllFormGroups = formToValid => {
     // on recherche tous les container qui ont la classe '.formGroup'
