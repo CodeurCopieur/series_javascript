@@ -15,7 +15,7 @@
   
   <div class="h-full w-full fixed top-0 background"></div>
   <div class="w-full px-8 my-32 flex max-w-screen-lg mx-auto">
-    <div class="w-1/2 p-12 side-column">
+    <div class="w-1/2 px-16 side-column">
       <h1 class="text-white text-8xl mt-16 font-bold">Hello<br> World.</h1>
       <p class="text-white my-8">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam, nulla!
@@ -34,9 +34,9 @@
         </div>
       </div>
     </div>
-    <div class="w-1/2 p-16 bg-white">
+    <div class="w-1/2 px-16 py-12 bg-white">
       <h2 class="text-4xl font-bold">Inscription</h2>
-      <p class="my-8">Vous avez déjà un compte ? <a href="#" class="text-blue-700">Connectez-vous</a> plutôt ici.</p>
+      <p class="my-5">Vous avez déjà un compte ? <a href="#" class="text-blue-700">Connectez-vous</a> plutôt ici.</p>
       
       <form action="" id="registrationForm">
 
@@ -47,6 +47,7 @@
             <input 
               required
               minlength="2"
+              custommaxlength="5"
               type="text" 
               id="firstName"
               class="w-full border-b-2 border-black outline-none py-2" >
@@ -65,7 +66,9 @@
         <div class="formGroup flex flex-col my-4">
           <label for="email">Adresse email</label>
           <div class="flex items-center">
-            <input type="email" class="w-full border-b-2 border-black outline-none py-2" id="email">
+            <input 
+              required 
+              type="email" class="w-full border-b-2 border-black outline-none py-2" id="email">
             <span class="error-icon hidden -ml-6 text-red-700">
               <i class="fa-solid fa-circle-exclamation"></i>
             </span>
