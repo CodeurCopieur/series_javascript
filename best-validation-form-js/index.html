@@ -67,6 +67,7 @@
           <label for="email">Adresse email</label>
           <div class="flex items-center">
             <input 
+              pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$"
               required 
               type="email" class="w-full border-b-2 border-black outline-none py-2" id="email">
             <span class="error-icon hidden -ml-6 text-red-700">
