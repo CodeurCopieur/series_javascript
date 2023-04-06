@@ -13,6 +13,15 @@ const valForm = formSelect => {
       errorMessage: (input, label) => `Il doit être inférieur à ${input.getAttribute('custommaxlength')} lettres pour votre ${label.textContent.toLowerCase()}`
     },
     {
+      attribute: 'pattern',
+      isValid: (input) => {
+        const patternRegex = new RegExp(input.pattern);
+
+        return patternRegex.test(input.value)
+      },
+      errorMessage: (input, label) => `pas valide ${label.textContent}`,
+    },
+    {
       attribute: 'required',
       isValid: (input) => input.value.trim() !== '',
       errorMessage: (input, label) => `${label.textContent} est requis`,
