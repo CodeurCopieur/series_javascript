@@ -78,7 +78,12 @@ const valForm = formSelect => {
     }
   }
 
-  formElt.setAttribute('novalidate', ''),
+  formElt.setAttribute('novalidate', '');
+  Array.from(formElt.elements).forEach(element => {
+    element.addEventListener('blur', event => {
+      validSingleFormGroup(event.srcElement.parentElement.parentElement)
+    })
+  })
   formElt.addEventListener('submit', e => {
     e.preventDefault();
     validAllFormGroups(formElt)
