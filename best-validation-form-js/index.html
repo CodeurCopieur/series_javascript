@@ -85,7 +85,10 @@
         <div class="formGroup flex flex-col my-4">
           <label for="password">Mot de passe</label>
           <div class="flex items-center">
-            <input type="password" class="w-full border-b-2 border-black outline-none py-2" id="password">
+            <input 
+              required
+              minlength="8"
+              type="password" class="w-full border-b-2 border-black outline-none py-2" id="password">
             <span class="error-icon hidden -ml-6 text-red-700">
               <i class="fa-solid fa-circle-exclamation"></i>
             </span>
@@ -101,7 +104,11 @@
         <div class="formGroup flex flex-col my-4">
           <label for="confirmPassword">Confirm password</label>
           <div class="flex items-center">
-            <input type="password" class="w-full border-b-2 border-black outline-none py-2" id="confirmPassword">
+            <input 
+              match="password"
+              required
+              minlength="8"
+              type="password" class="w-full border-b-2 border-black outline-none py-2" id="confirmPassword">
             <span class="error-icon hidden -ml-6 text-red-700">
               <i class="fa-solid fa-circle-exclamation"></i>
             </span>
