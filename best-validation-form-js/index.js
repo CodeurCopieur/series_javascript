@@ -13,6 +13,23 @@ const valForm = formSelect => {
       errorMessage: (input, label) => `Il doit être inférieur à ${input.getAttribute('custommaxlength')} lettres pour votre ${label.textContent.toLowerCase()}`
     },
     {
+      attribute: 'match',
+      isValid: (input) => {
+        const matchSelector = input.getAttribute('match');
+        const matchedElement = document.querySelector(`#${matchSelector}`)
+
+        return matchedElement && matchedElement.value.trim() === input.value.trim()
+      },
+      errorMessage: (input, label) => {
+        const matchSelector = input.getAttribute('match');
+        const matchedElement = document.querySelector(`#${matchSelector}`)
+
+        const matchLabel = matchedElement.parentElement.parentElement.querySelector('label');
+
+        return `${label.textContent} devrait correspondre à ${matchLabel.textContent.toLowerCase()}`
+      }
+    },
+    {
       attribute: 'pattern',
       isValid: (input) => {
         const patternRegex = new RegExp(input.pattern);
