@@ -27,17 +27,66 @@
             <span class="title">Song Title</span>
             <span class="artist">Artist Name</span>
           </div>
+
           <!-- Player Controls -->
           <div class="controls">
-            <div class="music-timer">
+            <div class="song-timer">
               <span class="current-time">00:00</span>
               <span class="duration-time">04:12</span>
+            </div>
+
+            <!-- Song duration -->
+            <div class="duration">
+              <input 
+                type="range" 
+                class="duration-slider"
+                min="0"
+                max="100" value="0">
+            </div>
+
+            <!-- Buttons : play, next and prev -->
+            <div class="buttons">
+              <button class="prev">
+                <i class="fas fa-step-backward"></i>
+              </button>
+              <button class="play">
+                <i class="fas fa-play"></i>
+              </button>
+              <button class="next">
+                <i class="fas fa-step-forward"></i>
+              </button>
+            </div>
+
+            <button class="play-all">
+              Play All <i class="fas fa-step-forward"></i>
+            </button>
+
+            <!-- Volume -->
+            <div class="volume">
+              <p id="show-volume">50</p>
+              <i class="fas fa-volume-up" id="volume-icon"></i>
+              <input type="range" id="volume" min="0" max="100" value="50" />
             </div>
           </div>
         </div>
         <!-- PlayList  -->
         <div class="music-playist">
-          
+          <!-- Header -->
+          <header class="header playlist-header">
+            <ul>
+              <li><i class="fas fa-music"></i></li>
+              <li><h2>PlayList</h2></li>
+              <li><i class="fas fa-times"></i></li>
+            </ul>
+          </header>
+
+          <!-- Playlist Item -->
+          <div class="playlist-div">
+            <!-- <div class="playlist">
+              <span class="song-index">1</span>
+              <p class="single-song">Song one</p>
+            </div> -->
+          </div>
         </div>
 
       </div>
