@@ -30,6 +30,8 @@ var timer,
 
 // All Event Listeners
 play.addEventListener('click', justPlay)
+next.addEventListener('click', nextSong)
+previous.addEventListener('click', prevSong)
 
 // Load Tracks
 function loadTrack(indexTrack) {
@@ -43,7 +45,6 @@ function loadTrack(indexTrack) {
 loadTrack(indexTrack)
 
 // Play Song or Pause Song
-
 function justPlay() {
   if(songIsPlaying == false) {
     playSong()
@@ -51,6 +52,8 @@ function justPlay() {
     pauseSong()
   }
 }
+
+
 
 // Play Song
 function playSong() {
@@ -64,4 +67,30 @@ function pauseSong() {
   track.pause()
   songIsPlaying = false
   play.innerHTML = '<i class="fas fa-play"></i>'
+}
+
+// Next Song
+function nextSong() {
+  if (indexTrack < trackList.length - 1) {
+    indexTrack++;
+    loadTrack(indexTrack)
+    playSong()
+  } else {
+    indexTrack = 0;
+    loadTrack(indexTrack)
+    playSong()
+  }
+}
+
+//Prev Song
+function prevSong() {
+  if (indexTrack > 0) {
+    indexTrack--;
+    loadTrack(indexTrack)
+    playSong()
+  } else {
+    indexTrack = trackList.length - 1;
+    loadTrack(indexTrack)
+    playSong()
+  }
 }
