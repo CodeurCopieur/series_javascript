@@ -14,7 +14,7 @@ var play = document.querySelector('.play'),
       showVolume = document.querySelector('#show-volume'),
       iconVolume = document.querySelector('#volume-icon'),
 
-      autoPlay = document.querySelector('.play-all'),
+      autoPlayBtn = document.querySelector('.play-all'),
 
       hamBurger = document.querySelector('.fa-bars'),
       closeIcon = document.querySelector('.fa-times'),
@@ -32,6 +32,7 @@ var timer,
 play.addEventListener('click', justPlay)
 next.addEventListener('click', nextSong)
 previous.addEventListener('click', prevSong)
+autoPlayBtn.addEventListener('click', autoPlayToggle)
 
 // Load Tracks
 function loadTrack(indexTrack) {
@@ -82,7 +83,7 @@ function nextSong() {
   }
 }
 
-//Prev Song
+// Prev Song
 function prevSong() {
   if (indexTrack > 0) {
     indexTrack--;
@@ -92,5 +93,16 @@ function prevSong() {
     indexTrack = trackList.length - 1;
     loadTrack(indexTrack)
     playSong()
+  }
+}
+
+// Auto Play Toggle
+function autoPlayToggle() {
+  if (autoplay === 0) {
+    autoplay = 1;
+    autoPlayBtn.style.background = "#db6400";
+  } else {
+    autoplay = 0;
+    autoPlayBtn.style.background = "#ccc";
   }
 }
