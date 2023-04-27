@@ -28,11 +28,15 @@ var timer,
     songIsPlaying = false,
     track = document.createElement('audio');
 
+    currentVolume.value = 50;
+
 // All Event Listeners
 play.addEventListener('click', justPlay)
 next.addEventListener('click', nextSong)
 previous.addEventListener('click', prevSong)
 autoPlayBtn.addEventListener('click', autoPlayToggle)
+iconVolume.addEventListener('click', muteSecond)
+currentVolume.addEventListener('click', changeVolume)
 
 // Load Tracks
 function loadTrack(indexTrack) {
@@ -105,4 +109,18 @@ function autoPlayToggle() {
     autoplay = 0;
     autoPlayBtn.style.background = "#ccc";
   }
+}
+
+// Mute Sound
+function muteSecond() {
+  track.volume = 0;
+  showVolume.innerHTML = 0;
+  currentVolume.value = 0;
+  iconVolume.classList.replace('fa-volume-up', 'fa-volume-mute')
+}
+
+// Change Volume
+function changeVolume() {
+  showVolume.innerHTML = currentVolume.value;
+  track.volume = currentVolume.value / 100;
 }
