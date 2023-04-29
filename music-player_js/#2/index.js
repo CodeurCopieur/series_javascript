@@ -8,7 +8,7 @@ var play = document.querySelector('.play'),
 
       trackCurrentTime = document.querySelector('.current-time'),
       trackDuration = document.querySelector('.duration-time'),
-      slider = document.querySelector('.duration-slider'),
+      durationSlider = document.querySelector('.duration-slider'),
 
       currentVolume = document.querySelector('#volume'),
       showVolume = document.querySelector('#show-volume'),
@@ -28,7 +28,6 @@ var timer,
     songIsPlaying = false,
     track = document.createElement('audio');
 
-    currentVolume.value = 50;
 
 // All Event Listeners
 play.addEventListener('click', justPlay)
@@ -36,7 +35,9 @@ next.addEventListener('click', nextSong)
 previous.addEventListener('click', prevSong)
 autoPlayBtn.addEventListener('click', autoPlayToggle)
 iconVolume.addEventListener('click', muteSecond)
-currentVolume.addEventListener('click', changeVolume)
+currentVolume.addEventListener('change', changeVolume)
+durationSlider.addEventListener('change', changeDuration)
+
 
 // Load Tracks
 function loadTrack(indexTrack) {
@@ -116,11 +117,23 @@ function muteSecond() {
   track.volume = 0;
   showVolume.innerHTML = 0;
   currentVolume.value = 0;
-  iconVolume.classList.replace('fa-volume-up', 'fa-volume-mute')
+  
+
+  if(iconVolume.classList.contains('fa-volume-up')) {
+    iconVolume.classList.replace('fa-volume-up', 'fa-volume-mute')
+  } else {
+    iconVolume.classList.replace('fa-volume-mute', 'fa-volume-up')
+  }
 }
 
 // Change Volume
 function changeVolume() {
   showVolume.innerHTML = currentVolume.value;
   track.volume = currentVolume.value / 100;
+}
+
+// Change Duration
+function changeDuration() {
+  var sliderPosition = track.duration * (durationSlider.value / 100)
+  track.currentTime = sliderPosition;
 }
