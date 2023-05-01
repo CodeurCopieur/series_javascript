@@ -1,9 +1,16 @@
+import {fetchJSON} from './functions/api.js'
+
 class infinitePagination {
-  
+
+  /** @type {string} */
   #endpoint
+  /** @type {HTMLTemplateElement} */
   #template
+  /** @type {HTMLElement} */
   #target
+  /** @type {string} */
   #elements
+  /** @type {IntersectionObserver} */
   #observer
 
 
@@ -13,8 +20,8 @@ class infinitePagination {
    */
   constructor(element) {
     this.#endpoint = element.dataset.endpoint
-    this.#template = element.dataset.template
-    this.#target = element.dataset.target
+    this.#template = document.querySelector(element.dataset.template)
+    this.#target = document.querySelector(element.dataset.target)
     this.#elements = element.dataset.elements
 
     console.log(this.#target);
@@ -22,10 +29,14 @@ class infinitePagination {
     this.#observer = new IntersectionObserver( entries => {
       for (entry of entries) {
         if (entry.isIntersecting) {
-          
+          this.#loadMore()
         }
       }
     })
+  }
+
+  async #loadMore() {
+    const comments = await fetchJSON(this.#endpoint)
   }
 }
 
