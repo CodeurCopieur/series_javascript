@@ -23,20 +23,20 @@ class infinitePagination {
     this.#template = document.querySelector(element.dataset.template)
     this.#target = document.querySelector(element.dataset.target)
     this.#elements = element.dataset.elements
-
-    console.log(this.#target);
-
     this.#observer = new IntersectionObserver( entries => {
-      for (entry of entries) {
+      for (const entry of entries) {
         if (entry.isIntersecting) {
           this.#loadMore()
         }
       }
     })
+
+    this.#observer.observe(element)
   }
 
   async #loadMore() {
     const comments = await fetchJSON(this.#endpoint)
+    console.log(comments);
   }
 }
 
