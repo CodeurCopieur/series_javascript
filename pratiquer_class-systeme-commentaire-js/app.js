@@ -59,6 +59,9 @@ class infinitePagination {
     const comments = await fetchJSON(this.#endpoint)
     for (const comment of comments) {
       const commentElement = this.#template.content.cloneNode(true)
+      for (const [key, selector] of Object.entries(this.#elements)) {
+          commentElement.querySelector(selector).innerText = comment[key]
+      }
       this.#target.append(commentElement)
     }
 
