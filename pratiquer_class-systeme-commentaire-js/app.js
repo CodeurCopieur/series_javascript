@@ -23,9 +23,21 @@ class infinitePagination {
    * @param {HTMLElement} element 
    */
   constructor(element) {
+    /**
+     * attribut : data-endpoint
+     */
     this.#endpoint = element.dataset.endpoint
+    /**
+     * attribut : data-template
+     */
     this.#template = document.querySelector(element.dataset.template)
+    /**
+     * attribut : data-target
+     */
     this.#target = document.querySelector(element.dataset.target)
+    /**
+     * attribut : data-elements
+     */
     this.#elements = JSON.parse(element.dataset.elements)
     this.#observer = new IntersectionObserver( entries => {
       for (const entry of entries) {
