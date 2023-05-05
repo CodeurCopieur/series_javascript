@@ -2,6 +2,8 @@ import {fetchJSON} from './functions/api.js'
 
 class infinitePagination {
 
+  /** @type {HTMLElement} */
+  #loader
   /** @type {string} */
   #endpoint
   /** @type {HTMLTemplateElement} */
@@ -23,6 +25,10 @@ class infinitePagination {
    * @param {HTMLElement} element 
    */
   constructor(element) {
+    /**
+     * attribut : element
+     */
+    this.#loader = element
     /**
      * attribut : data-endpoint
      */
@@ -56,7 +62,18 @@ class infinitePagination {
     }
 
     this.#loading = true
-    const comments = await fetchJSON(this.#endpoint)
+
+    const url = new URL(this.#endpoint)
+    url.searchParams.set('_page', this.#page)
+
+    const comments = await fetchJSON(url.toString())
+
+    if (comments.length === 0 || this.#page === 3) {
+      this.#observer.disconnect()
+      this.#loader.remove()
+      return
+    }
+
     for (const comment of comments) {
       const commentElement = this.#template.content.cloneNode(true)
       for (const [key, selector] of Object.entries(this.#elements)) {
@@ -65,6 +82,7 @@ class infinitePagination {
       this.#target.append(commentElement)
     }
 
+    this.#page++
     this.#loading = false
   }
 }
