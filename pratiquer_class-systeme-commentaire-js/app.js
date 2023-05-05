@@ -8,10 +8,14 @@ class infinitePagination {
   #template
   /** @type {HTMLElement} */
   #target
-  /** @type {string} */
+  /** @type {object} */
   #elements
   /** @type {IntersectionObserver} */
   #observer
+  /** @type {boolean} */
+  #loading = false
+  /** @type {number} */
+  #page = 1
 
 
   /**
@@ -22,7 +26,7 @@ class infinitePagination {
     this.#endpoint = element.dataset.endpoint
     this.#template = document.querySelector(element.dataset.template)
     this.#target = document.querySelector(element.dataset.target)
-    this.#elements = element.dataset.elements
+    this.#elements = JSON.parse(element.dataset.elements)
     this.#observer = new IntersectionObserver( entries => {
       for (const entry of entries) {
         if (entry.isIntersecting) {
@@ -35,8 +39,18 @@ class infinitePagination {
   }
 
   async #loadMore() {
+    if (this.#loading) {
+      return
+    }
+
+    this.#loading = true
     const comments = await fetchJSON(this.#endpoint)
-    console.log(comments);
+    for (const comment of comments) {
+      const commentElement = this.#template.content.cloneNode(true)
+      this.#target.append(commentElement)
+    }
+
+    this.#loading = false
   }
 }
 
