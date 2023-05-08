@@ -1,4 +1,5 @@
 import {fetchJSON} from './functions/api.js'
+import {alert} from './functions/alert.js'
 
 class infinitePagination {
 
@@ -61,29 +62,38 @@ class infinitePagination {
       return
     }
 
-    this.#loading = true
+    try {
 
-    const url = new URL(this.#endpoint)
-    url.searchParams.set('_page', this.#page)
+      this.#loading = true
 
-    const comments = await fetchJSON(url.toString())
+      const url = new URL(this.#endpoint)
+      url.searchParams.set('_page', this.#page)
 
-    if (comments.length === 0 || this.#page === 3) {
+      const comments = await fetchJSON(url.toString())
+
+      if (comments.length === 0 || this.#page === 3) {
+        this.#observer.disconnect()
+        this.#loader.remove()
+        return
+      }
+
+      for (const comment of comments) {
+        const commentElement = this.#template.content.cloneNode(true)
+        for (const [key, selector] of Object.entries(this.#elements)) {
+            commentElement.querySelector(selector).innerText = comment[key]
+        }
+        this.#target.append(commentElement)
+      }
+
+      this.#page++
+      this.#loading = false
+
+    } catch (error) {
+      this.#target.append(alert('Impossible de charger le contenus'))
       this.#observer.disconnect()
       this.#loader.remove()
-      return
-    }
 
-    for (const comment of comments) {
-      const commentElement = this.#template.content.cloneNode(true)
-      for (const [key, selector] of Object.entries(this.#elements)) {
-          commentElement.querySelector(selector).innerText = comment[key]
-      }
-      this.#target.append(commentElement)
     }
-
-    this.#page++
-    this.#loading = false
   }
 }
 
