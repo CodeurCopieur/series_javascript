@@ -62,9 +62,10 @@ class infinitePagination {
       return
     }
 
+    this.#loading = true
     try {
 
-      this.#loading = true
+      
 
       const url = new URL(this.#endpoint)
       url.searchParams.set('_page', this.#page)
@@ -89,9 +90,17 @@ class infinitePagination {
       this.#loading = false
 
     } catch (error) {
-      this.#target.append(alert('Impossible de charger le contenus'))
-      this.#observer.disconnect()
-      this.#loader.remove()
+      this.#loader.style.display = 'none' 
+
+      const erreur = alert('Impossible de charger le contenus')
+      erreur.addEventListener('close', () => {
+        this.#loader.style.removeProperty('display')
+        this.#loading = false
+      })
+
+      // this.#target.append(erreur)
+      // this.#observer.disconnect()
+      // this.#loader.remove()
 
     }
   }
