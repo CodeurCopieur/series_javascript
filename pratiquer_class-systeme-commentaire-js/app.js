@@ -154,8 +154,9 @@ class Fetchform {
     btn.setAttribute('disabled', '')
 
     try {
+
       const data = new FormData(form);
-      const res = await fetchJSON(this.#endpoint, {
+      const comment = await fetchJSON(this.#endpoint, {
         method: 'POST',
         json: Object.fromEntries(data)
         // body: JSON.stringify(Object.fromEntries(data)),
@@ -163,7 +164,16 @@ class Fetchform {
         //   'Content-type': 'application/json'
         // }
       })
-      console.log(res);
+
+      const commentElement = this.#template.content.cloneNode(true)
+      for (const [key, selector] of Object.entries(this.#elements)) {
+          commentElement.querySelector(selector).innerText = comment[key]
+      }
+
+      this.#target.prepend(commentElement)
+      form.reset()
+      btn.removeAttribute('disabled')
+
     } catch (error) {
       
     }
