@@ -157,10 +157,11 @@ class Fetchform {
       const data = new FormData(form);
       const res = await fetchJSON(this.#endpoint, {
         method: 'POST',
-        body: JSON.stringify(Object.fromEntries(data)),
-        headers: {
-          'Content-type': 'application/json'
-        }
+        json: Object.fromEntries(data)
+        // body: JSON.stringify(Object.fromEntries(data)),
+        // headers: {
+        //   'Content-type': 'application/json'
+        // }
       })
       console.log(res);
     } catch (error) {
