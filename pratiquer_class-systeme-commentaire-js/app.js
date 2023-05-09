@@ -174,6 +174,8 @@ class Fetchform {
       form.reset()
       btn.removeAttribute('disabled')
 
+      form.insertAdjacentElement('beforebegin', alert('envoie du commentaire', 'success'))
+
     } catch (error) {
       
       const erreurElt = alert('Erreur Serveur')
