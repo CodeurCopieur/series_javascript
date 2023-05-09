@@ -106,6 +106,73 @@ class infinitePagination {
   }
 }
 
+class Fetchform {
+
+    /** @type {string} */
+    #endpoint
+    /** @type {HTMLTemplateElement} */
+    #template
+    /** @type {HTMLElement} */
+    #target
+    /** @type {object} */
+    #elements
+  
+  /**
+   * 
+   * @param {HTMLFormElement} form 
+   */
+  constructor(form){
+
+    /**
+    * attribut : data-endpoint
+    */
+    this.#endpoint = form.dataset.endpoint
+    /**
+     * attribut : data-template
+     */
+    this.#template = document.querySelector(form.dataset.template)
+    /**
+     * attribut : data-target
+     */
+    this.#target = document.querySelector(form.dataset.target)
+    /**
+     * attribut : data-elements
+     */
+    this.#elements = JSON.parse(form.dataset.elements)
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      this.#submitFrom(e.currentTarget)
+    })
+  }
+
+  /**
+   * 
+   * @param {HTMLFormElement} form 
+   */
+  async #submitFrom(form) {
+    const btn = form.querySelector('button')
+    btn.setAttribute('disabled', '')
+
+    try {
+      const data = new FormData(form);
+      const res = await fetchJSON(this.#endpoint, {
+        method: 'POST',
+        body: JSON.stringify(Object.fromEntries(data)),
+        headers: {
+          'Content-type': 'application/json'
+        }
+      })
+      console.log(res);
+    } catch (error) {
+      
+    }
+  }
+}
+
 document
   .querySelectorAll('.js-infinite-pagination')
   .forEach( el => new infinitePagination(el))
+
+document
+  .querySelectorAll('.js-form-fetch')
+  .forEach( form => new Fetchform(form))
