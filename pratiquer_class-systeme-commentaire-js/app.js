@@ -176,6 +176,12 @@ class Fetchform {
 
     } catch (error) {
       
+      const erreurElt = alert('Erreur Serveur')
+      form.insertAdjacentElement('beforebegin', erreurElt)
+
+      erreurElt.addEventListener('close', () => {
+        btn.removeAttribute('disabled')
+      })
     }
   }
 }
