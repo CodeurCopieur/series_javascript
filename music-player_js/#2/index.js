@@ -41,12 +41,17 @@ durationSlider.addEventListener('change', changeDuration)
 
 // Load Tracks
 function loadTrack(indexTrack) {
+
+  clearInterval(timer)
+
   track.src = trackList[indexTrack].path
   trackList.src = trackList[indexTrack].img
   title.innerHTML = trackList[indexTrack].name
   artist.innerHTML = trackList[indexTrack].singer
 
   track.load()
+
+  timer = setInterval(updateSlider, 1000)
 }
 loadTrack(indexTrack)
 
@@ -58,7 +63,6 @@ function justPlay() {
     pauseSong()
   }
 }
-
 
 
 // Play Song
@@ -136,4 +140,37 @@ function changeVolume() {
 function changeDuration() {
   var sliderPosition = track.duration * (durationSlider.value / 100)
   track.currentTime = sliderPosition;
+}
+
+// Update Slider
+function updateSlider() {
+  let position = 0;
+
+  if (!isNaN(track.duration)) {
+    position = track.currentTime * (100/track.duration)
+    durationSlider.value = position
+  }
+
+  if (track.ended) {
+    play.innerHTML = '<i class="fas fa-play"></i>'
+
+    if (autoplay === 1 && indexTrack < trackList.length - 1) {
+
+      indexTrack++
+      loadTrack(indexTrack)
+      playSong()
+
+    } else if(autoplay === 1 && indexTrack === trackList.length - 1) {
+
+      indexTrack = 0
+      loadTrack(indexTrack)
+      playSong()
+      
+    }
+  }
+}
+
+// Reset Slider
+function resetSlider() {
+  durationSlider.value = 0
 }
