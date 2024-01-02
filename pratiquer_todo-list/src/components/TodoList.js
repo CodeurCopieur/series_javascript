@@ -1,4 +1,5 @@
 import { createElt } from '../functions/dom.js';
+import { cloneTemplate } from '../functions/dom.js';
 
 /**
  * @export
@@ -28,21 +29,7 @@ export class TodoList {
    * @param {HTMLElement} element
    */
   appendTo(elt) {
-    elt.innerHTML = `
-    <form class="d-flex pb-4">
-      <input required="" class="form-control" type="text" placeholder="Acheter des patates..." name="title" data-com.bitwarden.browser.user-edited="yes">
-      <button class="btn btn-primary">Ajouter</button>
-    </form>
-    <main>
-        <div class="btn-group mb-4" role="group">
-            <button type="button" class=" btn btn-outline-primary active" data-filter="all">Toutes</button>
-            <button type="button" class=" btn btn-outline-primary" data-filter="todo">A faire</button>
-            <button type="button" class=" btn btn-outline-primary" data-filter="done">Faites</button>
-        </div>
-
-        <ul class="list-group"></ul>
-    </main>
-    `
+    elt.append(cloneTemplate('todolist-layout'))
     
     this.#listElt = elt.querySelector('.list-group')
     for (let todo of this.#todos) {
@@ -116,22 +103,27 @@ export class TodoListItem {
 
   /** @type {Todo} */
   constructor(todo) {
+    console.log(todo);
     const id = `todo-${todo.id}`
-    // create li, the checkbox type input, label, button
-    const li = createElt('li', {class: 'todo list-group-item d-flex align-items-center'})
-    this.#elt = li
-    const inputCheckbox = createElt('input', { type:'checkbox', class: 'form-check-input', id, checked: todo.completed ? '' : null })
-    const label = createElt('label', {class: 'ms-2 form-check-label', for: id}, todo.title)
-    const button = createElt('button', {class: 'ms-auto btn btn-danger btn-sm'})
-    button.innerHTML = '<i class="bi-trash"></i>'
+    const li = cloneTemplate('todolist-item').firstElementChild
 
-    li.append(inputCheckbox)
-    li.append(label)
-    li.append(button)
+    this.#elt = li
+    const inputCheckbox = li.querySelector('input')
+    inputCheckbox.setAttribute('id', id)
+    if (todo.completed) {
+      inputCheckbox.setAttribute('checked', '')
+    }
+
+    const label = li.querySelector('label')
+    label.setAttribute('for', id)
+    label.innerText = todo.title
+
+    const button = li.querySelector('button')
+    this.toggle(inputCheckbox)
 
     button.addEventListener('click', e => this.remove(e))
     inputCheckbox.addEventListener('change', e => this.toggle(e.currentTarget))
-    this.toggle(inputCheckbox)
+    
   
   }
 
