@@ -45,6 +45,16 @@ export class TodoList {
     allBtn.forEach(btn => {
       btn.addEventListener('click', e => this.#toggleFilter(e))
     });
+
+    this.#listElt.addEventListener('delete', ({detail: todo}) => {
+      this.#todos = this.#todos.filter( t => t !== todo)
+      console.log(this.#todos);
+    })
+
+    this.#listElt.addEventListener('toggle', ({detail: todo}) => {
+      todo.completed = !todo.completed
+      console.log(this.#todos);
+    })
   }
 
   /**
@@ -100,10 +110,11 @@ export class TodoList {
 export class TodoListItem {
 
   #elt
+  #todo
 
   /** @type {Todo} */
   constructor(todo) {
-    console.log(todo);
+    this.#todo = todo
     const id = `todo-${todo.id}`
     const li = cloneTemplate('todolist-item').firstElementChild
 
@@ -124,6 +135,7 @@ export class TodoListItem {
     button.addEventListener('click', e => this.remove(e))
     inputCheckbox.addEventListener('change', e => this.toggle(e.currentTarget))
     
+    this.#elt.addEventListener('delete', e => {})
   
   }
 
@@ -143,6 +155,13 @@ export class TodoListItem {
    */
   remove(e) {
     e.preventDefault();
+
+    // Évènements personnalisés => detail(propager des informations) ,bubbles(propage l'évent), cancelable(annuler l'évent par un preventDefault)
+    const event = new CustomEvent('delete', {detail: this.#todo, bubbles: true, cancelable: true})
+    this.#elt.dispatchEvent(event)
+    if (event.defaultPrevented) {
+      return
+    }
     this.#elt.remove();
   }
 
@@ -156,5 +175,8 @@ export class TodoListItem {
       } else {
         this.#elt.classList.remove('is-completed')
       }
+
+      const event = new CustomEvent('toggle', {detail: this.#todo, bubbles: true})
+      this.#elt.dispatchEvent(event)
   }
 }
