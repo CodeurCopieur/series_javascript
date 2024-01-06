@@ -48,12 +48,12 @@ export class TodoList {
 
     this.#listElt.addEventListener('delete', ({detail: todo}) => {
       this.#todos = this.#todos.filter( t => t !== todo)
-      console.log(this.#todos);
+      this.#onUpdate()
     })
 
     this.#listElt.addEventListener('toggle', ({detail: todo}) => {
       todo.completed = !todo.completed
-      console.log(this.#todos);
+      this.#onUpdate()
     })
   }
 
@@ -78,9 +78,13 @@ export class TodoList {
 
     const item = new TodoListItem(todo)
     this.#listElt.prepend(item.elt)
-    // item.appendTo(this.#listElt)
-
+    this.#todos.push(todo)
+    this.#onUpdate()
     form.reset()
+  }
+
+  #onUpdate() {
+    localStorage.setItem('todos', JSON.stringify(this.#todos))
   }
 
   /**
