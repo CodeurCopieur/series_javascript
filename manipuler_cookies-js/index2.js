@@ -12,6 +12,15 @@ function decryptCookieData(encryptedData) {
 
 // Fonction pour créer un cookie avec des données chiffrées et une expiration en mois ou en années
 function setEncryptedCookie(cookieName, data, expiration, unit) {
+  const existingCookie = getDecryptedCookie(cookieName);
+
+  // Vérifier si le cookie existe déjà
+  if (existingCookie) {
+    console.log('Le cookie existe déjà. Faire quelque chose avec les données existantes si nécessaire.');
+    return;
+  }
+
+  
   const encryptedData = encryptCookieData(data);
 
   const expires = new Date();
