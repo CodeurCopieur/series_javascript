@@ -27,7 +27,9 @@ function setCookie(name, value, days) {
 }
 
 setCookie('hello', 'frist cookie', 10)
+setCookie('cookie1', 'cookie1 cookie', 10)
 
 // "cookie1=valeur%20avec%20espace; cookie2=valeur2" : ajouter dans les cookies(navigateur)
 console.log(getCookie('cookie1'));
 console.log(getCookie('hello'));
+
